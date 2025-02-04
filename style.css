@@ -1,0 +1,99 @@
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.center {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    height: 100%;
+}
+
+.text-box {
+    font-size: 3.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    color: #000e14;
+}
+
+span.animated-letter {
+    display: inline-flex;
+    justify-content: center;
+    position: relative;
+    transition: width 0.5s;
+}
+
+span.animated-letter.fade-in,
+span.animated-letter.fade-out,
+span.animated-letter.fade-in-out {
+    color: transparent;
+}
+
+span.animated-letter.fade-out::after,
+span.animated-letter.fate-in-out::after {
+    content: attr(data-char);
+    position: absolute;
+    transition: all 0.5s cubic-bezier(0, 0.55, 0.45, 1);
+    left: 0;
+    top: 0;
+    opacity: 1;
+    color: #000e14;
+    animation-name: letter-out;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: forwards;
+}
+
+span.animated-letter.fade-in::before{
+    animation-delay: 0.15s;
+}
+
+span.animated-letter.fade-in::before,
+span.animated-letter.fade-in-out::before {
+    animation-name: letter-in;
+    animation-duration: 0.5s;
+    animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation-fill-mode: forwards;
+}
+
+span.animated-letter::before {
+    content: attr(data-char-after);
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #000e14;
+    filter: blur(8px);
+    transform: rotateX(-50deg) translateY(70%);
+    opacity: 0;
+}
+
+@keyframes letter-in {
+    from {
+        filter: blur(8px);
+        transform: rotateX(-50deg) translateY(70%);
+        opacity: 0;
+    }
+
+    to {
+        filter: none;
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes letter-out {
+    from {
+        filter: none;
+        transform: none;
+        opacity: 1;
+    }
+
+    to {
+        filter: blur(8px);
+        transform: rotateX(50deg) translateY(-70%) scale(0.7);
+        opacity: 0;
+    }
+}
